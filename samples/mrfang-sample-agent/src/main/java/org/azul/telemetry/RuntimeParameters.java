@@ -1,6 +1,7 @@
 package org.azul.telemetry;
 
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * POJO for runtime parameters.
@@ -15,7 +16,7 @@ public class RuntimeParameters {
      *
      * @param collectedParams collector with runtime params
      */
-    public RuntimeParameters(RuntimeParamsCollector collectedParams) {
+    public RuntimeParameters(@NotNull RuntimeParamsCollector collectedParams) {
         name = collectedParams.getProcessName();
         environment = collectedParams.getEnvironmentVars();
         systemProperties = collectedParams.getSystemProperties();

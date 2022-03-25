@@ -1,11 +1,5 @@
 package org.azul.telemetry;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,28 +15,17 @@ public class Agent {
      *
      * @param args args passed from command line.
      */
-    public static void premain(String args) throws InterruptedException {
+    public static void premain(String args) {
         final var data = new RuntimeParamsCollector();
-        final var directory = System.getProperty("user.home") + "/.azul-telemetry/";
-        final var fileName = data.getProcessName()
-            + "_"
-            + new Random().nextInt()
-            +  ".json";
-        logger.debug("Agent started for process " + data.getProcessName());
+        logger.debug("Agent for " + data.getProcessName() + "started");
 
-        try {
-            if (!Files.exists(Path.of(directory))) {
-                logger.info(directory + " doesn't exists. Creating...");
-                Files.createDirectories(Path.of(directory));
+        new Thread(() -> {
+            try {
+                final var repository = RuntimeParametersRepository.getInstance();
+                repository.saveParams(new RuntimeParameters(data));
+            } catch (RuntimeException e) {
+                logger.error("Cannot save data. Reason: " + e);
             }
-
-            Files.createFile(Path.of(directory, fileName));
-            new ObjectMapper().writeValue(
-                new File(directory + fileName),
-                new RuntimeParameters(data)
-            );
-        } catch (IOException e) {
-            logger.error("Cannot start agent. Reason: " + e);
-        }
+        }).start();
     }
 }

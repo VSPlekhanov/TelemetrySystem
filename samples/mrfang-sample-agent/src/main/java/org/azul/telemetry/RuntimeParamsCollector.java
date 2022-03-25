@@ -5,7 +5,7 @@ import java.lang.management.RuntimeMXBean;
 import java.util.Map;
 
 /**
- * Collects runtime parameters (such as environment and JSV system properties)
+ * Collects runtime parameters (such as environment and JVM system properties)
  * at every instantiation.
  */
 public class RuntimeParamsCollector {
@@ -14,7 +14,7 @@ public class RuntimeParamsCollector {
     private final Map<String, String> systemProperties;
 
     /**
-     * Collects runtime parameters and saves it.
+     * Collects runtime parameters.
      */
     public RuntimeParamsCollector() {
         RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
