@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:14.1
+    volumes:
+      - ./pg-data/:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${AZUL_TELEMETRY_DB_USERNAME}
+      POSTGRES_PASSWORD: ${AZUL_TELEMETRY_DB_PASSWORD}
+      POSTGRES_DB: ${AZUL_TELEMETRY_DB_DBNAME}
+
+  app:
+    build:
+      dockerfile: docker/app/Dockerfile
+      context: .
+    env_file:
+      - .env
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    entrypoint: 'wait-for-it.sh db:5432 --'
+    command: ['java', '-jar', 'app.jar']
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - ./pgadmin-data/:/var/lib/pgadmin
+    restart: unless-stopped
+    ports:
+      - '${AZUL_TELEMETRY_PGADMIN_PORT:-5050}:80'
