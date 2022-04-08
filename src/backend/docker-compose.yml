@@ -8,19 +8,8 @@ services:
       POSTGRES_USER: ${AZUL_TELEMETRY_DB_USERNAME}
       POSTGRES_PASSWORD: ${AZUL_TELEMETRY_DB_PASSWORD}
       POSTGRES_DB: ${AZUL_TELEMETRY_DB_DBNAME}
-
-  app:
-    build:
-      dockerfile: docker/app/Dockerfile
-      context: .
-    env_file:
-      - .env
     ports:
-      - '8080:8080'
-    depends_on:
-      - db
-    entrypoint: 'wait-for-it.sh db:5432 --'
-    command: ['java', '-jar', 'app.jar']
+      - '127.0.0.1:${AZUL_TELEMETRY_DB_PORT:-5432}:5432'
 
   pgadmin:
     image: dpage/pgadmin4
@@ -30,4 +19,4 @@ services:
       - ./pgadmin-data/:/var/lib/pgadmin
     restart: unless-stopped
     ports:
-      - '${AZUL_TELEMETRY_PGADMIN_PORT:-5050}:80'
+      - '127.0.0.1:${AZUL_TELEMETRY_PGADMIN_PORT:-5050}:80'
