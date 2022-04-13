@@ -21,3 +21,6 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
+tasks.getByName<JavaExec>("bootRun") {
+    classpath("${project.rootDir}") // To fetch .env file
+}
