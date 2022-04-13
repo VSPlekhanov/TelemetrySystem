@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.9'
 services:
   db:
     image: postgres:14.1
@@ -15,6 +15,8 @@ services:
     image: dpage/pgadmin4
     environment:
       PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_DEFAULT_EMAIL: ${AZUL_TELEMETRY_PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${AZUL_TELEMETRY_PGADMIN_DEFAULT_PASSWORD:-admin}
     volumes:
       - ./pgadmin-data/:/var/lib/pgadmin
     restart: unless-stopped
