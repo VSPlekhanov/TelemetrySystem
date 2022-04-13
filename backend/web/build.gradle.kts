@@ -21,6 +21,3 @@ tasks.getByName<Test>("test") {
     useJUnitPlatform()
 }
 
-tasks.getByName<Jar>("bootJar") {
-    archiveFileName.set("web.jar")
-}
