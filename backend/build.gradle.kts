@@ -9,7 +9,5 @@ subprojects {
     configure<CheckstyleExtension> {
         toolVersion = "10.0"
     }
-    task<Wrapper>("wrapper") {
-        gradleVersion = "7.2"
-    }
+    task<Wrapper>("wrapper") {}
 }

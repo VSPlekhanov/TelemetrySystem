@@ -3,6 +3,8 @@ package org.azul.telemetry.web.controllers;
 import java.util.List;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.azul.telemetry.data.User;
 import org.azul.telemetry.data.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@Data
+@RequiredArgsConstructor
 public class UserController {
 
     @Autowired
