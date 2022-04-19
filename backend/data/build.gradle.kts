@@ -1,5 +1,6 @@
 plugins {
     `java-library`
+    id("io.freefair.lombok") version "6.4.2"
 }
 
 group = "org.azul.telemetry"
@@ -12,6 +13,7 @@ java {
 dependencies {
     implementation("org.postgresql:postgresql:42.3.3")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.6")
+    implementation("org.projectlombok:lombok:1.18.18")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.6")
 }
 

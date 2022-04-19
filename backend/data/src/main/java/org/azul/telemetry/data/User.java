@@ -1,5 +1,8 @@
 package org.azul.telemetry.data;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +14,7 @@ import javax.persistence.Table;
  * .
  */
 @Entity
+@Data
 @Table(name = "users")
 public class User {
     @Id
@@ -19,22 +23,4 @@ public class User {
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    public User setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public User setName(String name) {
-        this.name = name;
-        return this;
-    }
 }
