@@ -17,7 +17,7 @@ dependencies {
     implementation("me.paulschwarz:spring-dotenv:2.5.2")
     implementation("org.springframework.boot:spring-boot-starter-web:2.6.6")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.6")
-    runtimeOnly("org.flywaydb:flyway-gradle-plugin:3.0")
+//    com("org.flywaydb:flyway-gradle-plugin:3.0")
 }
 
 tasks.getByName<Test>("test") {
