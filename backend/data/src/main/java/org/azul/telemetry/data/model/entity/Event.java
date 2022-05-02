@@ -1,61 +1,32 @@
 package org.azul.telemetry.data.model.entity;
 
-import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.experimental.FieldDefaults;
+import lombok.Builder;
+import lombok.Data;
 import org.azul.telemetry.data.model.EventType;
-import org.hibernate.Hibernate;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@RequiredArgsConstructor
-@ToString
-@Table(name = "events", schema = "azul_schema")
-@TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class)
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@Data
+@Builder
+@Table(name = "events")
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     User user;
 
-    @Column(name = "event_type", columnDefinition = "event_types")
+    @Column(name = "event_type")
     @Enumerated(EnumType.STRING)
-    @Type(type = "pgsql_enum")
     EventType eventType;
 
     @Column(name = "created_at")
     Timestamp createdAt;
 
     @Column(name = "event_data")
-    @Type(type = "json")
     String eventData;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Event event = (Event) o;
-
-        return Objects.equals(id, event.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return 1491041522;
-    }
 }

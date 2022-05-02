@@ -1,7 +1,5 @@
 package org.azul.telemetry.data.service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import org.azul.telemetry.data.model.entity.User;
 import org.azul.telemetry.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,13 @@ import java.util.List;
  * .
  */
 @Service
-@Value
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserService {
-    UserRepository repository;
+    final UserRepository repository;
+
+    @Autowired
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public List<User> getAll() {
         return repository.findAll();
