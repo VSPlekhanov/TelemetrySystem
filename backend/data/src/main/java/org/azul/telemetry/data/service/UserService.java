@@ -1,6 +1,9 @@
-package org.azul.telemetry.data;
+package org.azul.telemetry.data.service;
 
 import java.util.List;
+
+import org.azul.telemetry.data.model.entity.User;
+import org.azul.telemetry.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

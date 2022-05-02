@@ -1,3 +1,4 @@
 rootProject.name = "telemetry-backend"
 include("web")
 include("data")
+include("agent")

@@ -1,6 +1,5 @@
-package org.azul.telemetry.data;
+package org.azul.telemetry.data.model.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.Column;

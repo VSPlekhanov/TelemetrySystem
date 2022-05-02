@@ -1,4 +1,4 @@
-package org.azul.telemetry.data;
+package org.azul.telemetry.data.config;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
