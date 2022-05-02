@@ -1,4 +1,4 @@
-package org.azul.telemetry.web;
+package org.azul.telemetry.data;
 
 import org.azul.telemetry.data.config.DataConfiguration;
 import org.springframework.boot.SpringApplication;
