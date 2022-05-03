@@ -1,6 +1,7 @@
 plugins {
     `java-library`
     id("org.springframework.boot") version "2.6.6"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("io.freefair.lombok") version "6.4.2"
 }
 
@@ -22,4 +23,8 @@ dependencies {
 
 tasks.getByName<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.getByName<JavaExec>("bootRun") {
+    classpath("${project.rootDir}") // To fetch .env file
 }
