@@ -7,6 +7,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+//@ComponentScan("org.azul.telemetry")
 @org.springframework.context.annotation.Configuration
 public class Config {
     @Bean

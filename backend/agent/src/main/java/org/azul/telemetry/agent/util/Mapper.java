@@ -16,13 +16,15 @@ import org.azul.telemetry.data.model.entity.User;
 public class Mapper {
     public static Event eventDtoToEventMapper(EventDto dto, User user) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
+        System.out.println(dto);
+        System.out.println(getEventDataFromEventDto(dto));
         String eventData = mapper.writeValueAsString(getEventDataFromEventDto(dto));
-        Event event = new Event();
-        event.setEventData(eventData);
-        event.setEventType(dto.getEventType());
-        event.setUser(user);
-        event.setCreatedAt(dto.getCreatedAt());
-        return event;
+        return Event.builder()
+                .eventType(dto.getEventType())
+                .eventData(eventData)
+                .createdAt(dto.getCreatedAt())
+                .user(user)
+                .build();
     }
 
     public static EventData getEventDataFromEventDto(EventDto dto) {

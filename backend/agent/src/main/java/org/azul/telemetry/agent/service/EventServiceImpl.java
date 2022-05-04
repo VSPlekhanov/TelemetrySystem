@@ -1,7 +1,6 @@
 package org.azul.telemetry.agent.service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.azul.telemetry.agent.model.EventDto;
 import org.azul.telemetry.agent.util.Mapper;
 import org.azul.telemetry.data.model.entity.Event;
@@ -18,14 +17,15 @@ import java.util.stream.Collectors;
 
 
 @Service
-@Value
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EventServiceImpl implements EventService {
 
+    @Autowired
     EventRepository eventRepository;
 
+    @Autowired
     UserRepository userRepository;
 
+    @Autowired
     Validator validator;
 
     @Override
@@ -34,7 +34,7 @@ public class EventServiceImpl implements EventService {
             validate(eventDto);
             Event event = Mapper.eventDtoToEventMapper(eventDto, userRepository.getById(eventDto.getClientId()));
             eventRepository.save(event);
-        } catch (Exception e) {
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(
                     String.format("Invalid data for %s event type. %s ", eventDto.getEventType(), e.getMessage()));
         }
