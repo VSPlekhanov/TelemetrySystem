@@ -1,4 +1,4 @@
-package org.azul.telemetry.data.model;
+package org.azul.telemetry.agent.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
