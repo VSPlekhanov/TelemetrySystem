@@ -1,19 +1,20 @@
-package org.azul.telemetry.data.model;
-
+package org.azul.telemetry.agent.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class ShutdownEventDto extends EventDto {
+public class StartEventDto extends EventDto {
     @NotNull
-    String reason;
+    Map<String, String> environmentVariables;
 
     @NotNull
-    Integer exitCode;
+    Map<String, String> systemProperties;
 }
+

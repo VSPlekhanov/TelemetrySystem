@@ -1,7 +1,7 @@
-package org.azul.telemetry.data.controller;
+package org.azul.telemetry.agent.controller;
 
-import org.azul.telemetry.data.model.EventDto;
-import org.azul.telemetry.data.service.EventService;
+import org.azul.telemetry.agent.model.EventDto;
+import org.azul.telemetry.agent.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -19,6 +19,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.6")
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("io.rest-assured:json-schema-validator:3.0.0")
+    implementation("org.springframework.boot:spring-boot-starter-validation:2.6.6")
 }
 
 tasks.getByName<Test>("test") {

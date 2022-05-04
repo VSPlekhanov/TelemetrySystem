@@ -1,9 +1,10 @@
-package org.azul.telemetry.data.model;
+package org.azul.telemetry.agent.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
+import org.azul.telemetry.data.model.EventType;
 
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;

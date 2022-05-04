@@ -1,4 +1,4 @@
-package org.azul.telemetry.data;
+package org.azul.telemetry.agent;
 
 import org.azul.telemetry.data.config.DataConfiguration;
 import org.springframework.boot.SpringApplication;
