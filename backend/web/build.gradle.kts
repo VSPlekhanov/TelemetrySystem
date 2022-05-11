@@ -13,6 +13,7 @@ java {
 
 dependencies {
     implementation(project(":data"))
+    implementation("me.paulschwarz:spring-dotenv:2.5.2")
     implementation("org.springframework.boot:spring-boot-starter-web:2.6.6")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.6")
 }
