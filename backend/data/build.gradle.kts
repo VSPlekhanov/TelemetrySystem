@@ -12,7 +12,6 @@ java {
 }
 
 dependencies {
-    implementation("me.paulschwarz:spring-dotenv:2.5.2")
     implementation("org.postgresql:postgresql:42.3.3")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.6")
     implementation("org.projectlombok:lombok:1.18.18")
