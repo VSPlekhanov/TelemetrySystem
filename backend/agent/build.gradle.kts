@@ -16,7 +16,6 @@ dependencies {
     implementation("me.paulschwarz:spring-dotenv:2.5.2")
     implementation("org.springframework.boot:spring-boot-starter-web:2.6.6")
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.6")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.6.6")
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("io.rest-assured:json-schema-validator:3.0.0")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.6.6")
