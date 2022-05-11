@@ -17,12 +17,12 @@ public class Mapper {
     public static Event eventDtoToEventMapper(EventDto dto, User user) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         String eventData = mapper.writeValueAsString(getEventDataFromEventDto(dto));
-        return Event.builder()
-                .eventType(dto.getEventType())
-                .eventData(eventData)
-                .createdAt(dto.getCreatedAt())
-                .user(user)
-                .build();
+        Event event = new Event();
+        event.setEventData(eventData);
+        event.setEventType(dto.getEventType());
+        event.setUser(user);
+        event.setCreatedAt(dto.getCreatedAt());
+        return event;
     }
 
     public static EventData getEventDataFromEventDto(EventDto dto) {

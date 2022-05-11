@@ -2,7 +2,6 @@ package org.azul.telemetry.data.model.entity;
 
 import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -22,7 +21,6 @@ import java.util.Objects;
 @Setter
 @RequiredArgsConstructor
 @ToString
-@Builder
 @Table(name = "events", schema = "azul_schema")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class)
 @FieldDefaults(level = AccessLevel.PRIVATE)
