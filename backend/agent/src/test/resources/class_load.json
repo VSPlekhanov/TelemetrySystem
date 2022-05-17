@@ -1,0 +1,11 @@
+{
+  "clientId": 1,
+  "authToken": "auth",
+  "createdAt": "2012-04-23T18:25:43.511Z",
+  "@type": "CLASSLOAD",
+  "loadedClasses": [
+    {
+      "className": "someClass"
+    }
+  ]
+}

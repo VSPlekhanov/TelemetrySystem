@@ -1,0 +1,1 @@
+ALTER TYPE event_types ADD VALUE 'CLASSLOAD';

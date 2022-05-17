@@ -21,7 +21,8 @@ import java.sql.Timestamp;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = ShutdownEventDto.class, name = EventType.Names.SHUTDOWN),
         @JsonSubTypes.Type(value = StartEventDto.class, name = EventType.Names.STARTUP),
-        @JsonSubTypes.Type(value = UpdateEventDto.class, name = EventType.Names.UPDATE)
+        @JsonSubTypes.Type(value = UpdateEventDto.class, name = EventType.Names.UPDATE),
+        @JsonSubTypes.Type(value = ClassLoadEventDto.class, name = EventType.Names.CLASSLOAD),
 })
 public class EventDto {
     @NotNull

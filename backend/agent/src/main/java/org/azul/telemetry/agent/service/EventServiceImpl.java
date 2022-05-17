@@ -33,6 +33,7 @@ public class EventServiceImpl implements EventService {
         try {
             validate(eventDto);
             Event event = Mapper.eventDtoToEventMapper(eventDto, userRepository.getById(eventDto.getClientId()));
+            System.out.println(event);
             eventRepository.save(event);
         } catch (Exception e) {
             throw new RuntimeException(

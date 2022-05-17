@@ -1,0 +1,13 @@
+{
+  "clientId": 1,
+  "authToken": "auth",
+  "createdAt": "2012-04-23T18:25:43.511Z",
+  "@type": "STARTUP",
+  "environmentVariables": {
+    "key1": "val1",
+    "key2": "val2"
+  },
+  "systemProperties": {
+    "k": "v"
+  }
+}

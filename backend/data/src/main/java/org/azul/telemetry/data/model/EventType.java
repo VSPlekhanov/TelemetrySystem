@@ -2,7 +2,7 @@ package org.azul.telemetry.data.model;
 
 
 public enum EventType {
-    STARTUP(Names.STARTUP), SHUTDOWN(Names.SHUTDOWN), UPDATE(Names.UPDATE);
+    STARTUP(Names.STARTUP), SHUTDOWN(Names.SHUTDOWN), UPDATE(Names.UPDATE), CLASSLOAD(Names.CLASSLOAD);
 
     private final String label;
 
@@ -18,5 +18,6 @@ public enum EventType {
         public static final String STARTUP = "STARTUP";
         public static final String SHUTDOWN = "SHUTDOWN";
         public static final String UPDATE = "UPDATE";
+        public static final String CLASSLOAD = "CLASSLOAD";
     }
 }
