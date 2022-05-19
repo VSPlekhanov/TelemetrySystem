@@ -1,5 +1,13 @@
-version: '3.9'
+version: '3.3'
 services:
+  agent:
+    build: .
+    restart: unless-stopped
+    ports:
+      - '${AZUL_TELEMETRY_AGENT_BACKEND_PORT:-8080}:80'
+    depends_on:
+      - db
+
   db:
     image: postgres:14.1
     volumes:
@@ -8,8 +16,9 @@ services:
       POSTGRES_USER: ${AZUL_TELEMETRY_DB_USERNAME}
       POSTGRES_PASSWORD: ${AZUL_TELEMETRY_DB_PASSWORD}
       POSTGRES_DB: ${AZUL_TELEMETRY_DB_DBNAME}
+    restart: unless-stopped
     ports:
-      - '127.0.0.1:${AZUL_TELEMETRY_DB_PORT:-5432}:5432'
+      - '${AZUL_TELEMETRY_DB_PORT:-5432}:5432'
 
   pgadmin:
     image: dpage/pgadmin4
@@ -21,4 +30,4 @@ services:
       - ./pgadmin-data/:/var/lib/pgadmin
     restart: unless-stopped
     ports:
-      - '127.0.0.1:${AZUL_TELEMETRY_PGADMIN_PORT:-5050}:80'
+      - '127.0.0.1:${AZUL_TELEMETRY_PGADMIN_PORT:-5050}:8080'
