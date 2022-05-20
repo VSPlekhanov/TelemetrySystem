@@ -1,13 +1,12 @@
 package org.azul.telemetry.data.model.entity;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
-import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 import lombok.experimental.FieldDefaults;
 import org.azul.telemetry.data.model.EventType;
 import org.hibernate.Hibernate;
@@ -15,7 +14,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -24,12 +23,12 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
-@RequiredArgsConstructor
 @ToString
+@Accessors(chain = true)
+@RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "events", schema = "azul_schema")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class)
-@TypeDef(name = "jsonb", typeClass = JsonType.class, defaultForType = JsonNode.class)
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,11 +44,10 @@ public class Event {
     EventType eventType;
 
     @Column(name = "created_at")
-    Timestamp createdAt;
+    Date createdAt;
 
     @Column(name = "event_data")
-    @Type(type = "jsonb")
-    JsonNode eventData;
+    String eventData;
 
     @Override
     public boolean equals(Object o) {

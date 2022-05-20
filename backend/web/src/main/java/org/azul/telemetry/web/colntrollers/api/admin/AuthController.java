@@ -1,4 +1,4 @@
-package org.azul.telemetry.web.api.admin;
+package org.azul.telemetry.web.colntrollers.api.admin;
 
 import lombok.RequiredArgsConstructor;
 import org.azul.telemetry.data.model.entity.RevokedToken;
@@ -25,7 +25,7 @@ import java.util.Set;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
- * Api controller for admin control panel.
+ * API controller for auth to admin control panel.
  */
 @RestController
 @RequestMapping("/api/admin/auth")

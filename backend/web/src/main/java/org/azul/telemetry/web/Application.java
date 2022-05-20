@@ -1,8 +1,6 @@
 package org.azul.telemetry.web;
 
 import org.azul.telemetry.data.config.DataConfiguration;
-import org.azul.telemetry.web.configuration.BeanConfiguration;
-import org.azul.telemetry.web.configuration.SecurityConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
