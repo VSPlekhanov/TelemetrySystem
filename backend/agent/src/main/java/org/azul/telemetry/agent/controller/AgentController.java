@@ -21,5 +21,4 @@ public class AgentController {
     public void addEvent(@Valid @RequestBody EventDto eventDto) {
         eventService.addEvent(eventDto);
     }
-
 }

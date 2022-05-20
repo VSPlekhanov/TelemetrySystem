@@ -1,4 +1,4 @@
-package org.azul.telemetry.web;
+package org.azul.telemetry.web.configuration;
 
 import org.azul.telemetry.web.auth.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;

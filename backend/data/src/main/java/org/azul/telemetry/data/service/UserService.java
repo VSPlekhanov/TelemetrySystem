@@ -88,6 +88,10 @@ public class UserService implements UserDetailsService {
                 .orElse(null);
     }
 
+    public User getById(@NotNull Long id) {
+        return userRepository.getById(id);
+    }
+
     @NotNull
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

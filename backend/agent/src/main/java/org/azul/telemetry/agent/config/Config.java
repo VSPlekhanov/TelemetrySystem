@@ -18,4 +18,3 @@ public class Config {
         return validator;
     }
 }
-
