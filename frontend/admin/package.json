@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "azul-telemetry-frontend-admin",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "ant-design-vue": "^3.2.0",
+    "axios": "^0.26.1",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14"
   },

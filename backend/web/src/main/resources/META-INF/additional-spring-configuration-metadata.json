@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "application.secret-key-file",
+      "type": "java.lang.String",
+      "description": "File with secret key for JWT signing. Key must be base64 encoded byte sequence at least 64 bytes long."
+    },
+    {
+      "name": "application.environment",
+      "type": "java.lang.String",
+      "description": "Environment mode. If is is \"DEVELOPMENT\" some security checks are disabled."
+    }
+  ]
+}

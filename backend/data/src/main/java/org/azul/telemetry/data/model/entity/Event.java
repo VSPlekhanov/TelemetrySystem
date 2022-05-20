@@ -16,6 +16,9 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+/**
+ * Event from agent.
+ */
 @Entity
 @Getter
 @Setter
@@ -47,8 +50,13 @@ public class Event {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
         Event event = (Event) o;
 
         return Objects.equals(id, event.id);
@@ -56,6 +64,6 @@ public class Event {
 
     @Override
     public int hashCode() {
-        return 1491041522;
+        return Long.hashCode(id);
     }
 }

@@ -7,6 +7,9 @@ import lombok.Value;
 
 import java.util.Map;
 
+/**
+ * TODO.
+ */
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @JsonSerialize

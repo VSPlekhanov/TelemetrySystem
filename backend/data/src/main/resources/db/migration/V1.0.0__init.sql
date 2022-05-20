@@ -1,9 +1,7 @@
-SET search_path TO azul_schema;
-
 CREATE TABLE IF NOT EXISTS users (
-    id serial NOT NULL,
-    name text NOT NULL,
-    CONSTRAINT user_pk PRIMARY KEY (id)
+    id bigserial PRIMARY KEY,
+    name character varying(255) UNIQUE NOT NULL,
+    password character varying(255) NOT NULL
 );
 
 CREATE TYPE event_types AS ENUM

@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 
+/**
+ * Payload of event that agent sends on application shutdown.
+ */
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @JsonSerialize
