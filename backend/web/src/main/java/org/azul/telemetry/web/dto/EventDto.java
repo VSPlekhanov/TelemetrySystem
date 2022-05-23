@@ -31,6 +31,6 @@ public class EventDto {
         type = event.getEventType().toString();
         createdAt = event.getCreatedAt();
         user = new UserDto(event.getUser());
-        additional = event.getEventData().asText();
+        additional = event.getEventData().toString();
     }
 }
