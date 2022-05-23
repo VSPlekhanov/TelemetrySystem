@@ -7,6 +7,9 @@ import lombok.Value;
 
 import java.util.Map;
 
+/**
+ * Payload of event that agent sends on application start.
+ */
 @Builder
 @JsonSerialize
 @Value

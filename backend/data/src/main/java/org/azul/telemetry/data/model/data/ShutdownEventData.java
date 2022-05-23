@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.Value;
 
+/**
+ * Payload of event that agent sends on application shutdown.
+ */
 @Builder
 @JsonSerialize
 @Value

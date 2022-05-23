@@ -30,13 +30,3 @@ tasks.getByName<Test>("test") {
 tasks.getByName<JavaExec>("bootRun") {
     classpath("${project.rootDir}") // To fetch .env file
 }
-
-sourceSets {
-    main {
-        resources {
-            srcDirs("${project.rootDir}/data/src/main/resources/", "${project.resources}}")
-//            include("/data/src/main/resources/")
-//            include("/agent/src/main/resources/")
-        }
-    }
-}

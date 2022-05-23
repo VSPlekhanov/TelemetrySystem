@@ -20,6 +20,7 @@ dependencies {
     implementation("com.vladmihalcea:hibernate-types-52:2.16.2")
     implementation("org.apache.logging.log4j:log4j-api:2.17.2")
     implementation("org.apache.logging.log4j:log4j-core:2.17.2")
+    implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("org.flywaydb:flyway-core:8.5.11")
 
     compileOnly("org.springframework.boot:spring-boot-starter-security:2.6.7")
