@@ -52,24 +52,24 @@ public class Agent {
         RuntimeParamsCollector paramsCollector = new RuntimeParamsCollector();
         RuntimeParameters params = new RuntimeParameters(paramsCollector);
 
-        if (parsedArguments.containsKey("clientId")) {
-            params.setClientId(parsedArguments.get("clientId"));
+        if (parsedArguments.containsKey("telemetry.agent.id")) {
+            params.setClientId(parsedArguments.get("telemetry.agent.id"));
         }
 
-        if (parsedArguments.containsKey("authToken")) {
-            params.setAuthToken(parsedArguments.get("authToken"));
+        if (parsedArguments.containsKey("telemetry.agent.authtoken")) {
+            params.setAuthToken(parsedArguments.get("telemetry.agent.authtoken"));
         }
 
-        if (parsedArguments.containsKey("enabled")) {
-            params.setEnabled(Boolean.parseBoolean(parsedArguments.get("enabled")));
+        if (parsedArguments.containsKey("telemetry.agent.enabled")) {
+            params.setEnabled(Boolean.parseBoolean(parsedArguments.get("telemetry.agent.enabled")));
         }
 
-        if (parsedArguments.containsKey("initialDelayMs")) {
-            params.setInitialDelayMs(Integer.parseInt(parsedArguments.get("initialDelayMs")));
+        if (parsedArguments.containsKey("telemetry.agent.initial_delay")) {
+            params.setInitialDelayMs(Integer.parseInt(parsedArguments.get("telemetry.agent.initial_delay")));
         }
 
-        if (parsedArguments.containsKey("telemetryIntervalMs")) {
-            params.setTelemetryIntervalMs(Integer.parseInt(parsedArguments.get("telemetryIntervalMs")));
+        if (parsedArguments.containsKey("telemetry.agent.telemetry_interval")) {
+            params.setTelemetryIntervalMs(Integer.parseInt(parsedArguments.get("telemetry.agent.telemetry_interval")));
         }
 
         return new TelemetryClient(params, instrumentation);
