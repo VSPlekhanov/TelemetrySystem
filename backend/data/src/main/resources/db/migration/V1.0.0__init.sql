@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS events (
     event_type event_types NOT NULL,
     user_id bigint NOT NULL,
     created_at timestamp NOT NULL,
-    event_data text NOT NULL,
+    event_data jsonb NOT NULL,
     CONSTRAINT event_pk PRIMARY KEY (id),
     CONSTRAINT event_user_fk FOREIGN KEY (user_id) REFERENCES users(id)
 );

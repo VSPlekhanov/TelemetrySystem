@@ -1,6 +1,8 @@
 package org.azul.telemetry.data.model.entity;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.vladmihalcea.hibernate.type.basic.PostgreSQLEnumType;
+import com.vladmihalcea.hibernate.type.json.JsonType;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@ import java.util.Objects;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "events", schema = "azul_schema")
 @TypeDef(name = "pgsql_enum", typeClass = PostgreSQLEnumType.class)
+@TypeDef(name = "jsonb", typeClass = JsonType.class, defaultForType = JsonNode.class)
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,7 +50,9 @@ public class Event {
     Date createdAt;
 
     @Column(name = "event_data")
-    String eventData;
+    @Type(type = "jsonb")
+    JsonNode eventData;
+
 
     @Override
     public boolean equals(Object o) {
