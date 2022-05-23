@@ -1,11 +1,11 @@
 package org.azul.telemetry;
 
-import org.azul.telemetry.entity.ClassInfo;
-import org.azul.telemetry.entity.EventType;
-import org.azul.telemetry.entity.events.Classload;
-import org.azul.telemetry.entity.events.Shutdown;
-import org.azul.telemetry.entity.events.Starting;
-import org.azul.telemetry.entity.events.Update;
+import org.azul.telemetry.entity.events.EventType;
+import org.azul.telemetry.entity.events.ClassloadEvent;
+import org.azul.telemetry.entity.events.ShutdownEvent;
+import org.azul.telemetry.entity.events.StartingEvent;
+import org.azul.telemetry.entity.events.UpdateEvent;
+import org.azul.telemetry.utils.Utils;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,8 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -23,12 +22,12 @@ import java.util.logging.Logger;
 
 public class TelemetryClient {
 
-    private static final String USER_AGENT = "Telemetry Client";
     private static final Logger logger = Logger.getLogger(TelemetryClient.class.getName());
     private final ScheduledExecutorService scheduledExecutor = Executors.newSingleThreadScheduledExecutor(TelemetryClient::createDaemonThread);
 
-    private static final int READ_TIMEOUT = 2000;
-    private static final int CONNECT_TIMEOUT = 1000;
+    private static final String USER_AGENT = "Telemetry Client";
+    private static final int READ_TIMEOUT = 20000;
+    private static final int CONNECT_TIMEOUT = 20000;
 
     private final RuntimeParameters props;
     private final String clientId;
@@ -54,27 +53,34 @@ public class TelemetryClient {
         return thread;
     }
 
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
     public void start() throws IOException {
         if (isEnabled) {
             logger.info("Starting telemetry client");
 
             sendEventNotification(EventType.STARTUP);
-            scheduledExecutor.scheduleAtFixedRate(
+
+            try {
+                scheduledExecutor.scheduleAtFixedRate(
                     this::updateMetrics,
                     props.getInitialDelayMs(),
                     props.getTelemetryIntervalMs(),
                     TimeUnit.MILLISECONDS
-            );
-        } else {
-            logger.warning("Telemetry agent is disabled");
+                );
+            } catch (Error ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
     public void stop() throws IOException {
-        logger.info("Stopping telemetry client with properties: " + props);
         if (isEnabled) {
+            logger.info("Stopping telemetry client with properties: " + props);
+
             isEnabled = false;
-            sendEventNotification(EventType.CLASSLOAD);
             sendEventNotification(EventType.SHUTDOWN);
             scheduledExecutor.shutdown();
         }
@@ -83,8 +89,8 @@ public class TelemetryClient {
     private void updateMetrics() {
         try {
             sendEventNotification(EventType.CLASSLOAD);
-        } catch (IOException error) {
-            error.printStackTrace();
+        } catch (IOException ex) {
+            logger.severe("Failed to update metrics: " + ex.getMessage());
         }
     }
 
@@ -92,33 +98,36 @@ public class TelemetryClient {
         String content = "";
 
         if (eventType == EventType.STARTUP) {
-            content = new Starting(clientId, authToken, isEnabled,
+            content = new StartingEvent(clientId, authToken, isEnabled,
                     props.getEnvironmentVariables(),
-                    props.getSystemProperties()).toString();
+                    props.getSystemProperties(),
+                    props.getVmInfo()).toString();
 
         } else if (eventType == EventType.SHUTDOWN) {
-            content = new Shutdown(clientId, authToken, isEnabled).toString();
+            content = new ShutdownEvent(clientId, authToken, isEnabled).toString();
 
         } else if (eventType == EventType.UPDATE) {
-            content = new Update(clientId, authToken, isEnabled,
+            content = new UpdateEvent(clientId, authToken, isEnabled,
                     props.getEnvironmentVariables(),
                     props.getSystemProperties()).toString();
 
         } else if (eventType == EventType.CLASSLOAD) {
-            List<ClassInfo> loadedClasses = Arrays.stream(instrumentation.getAllLoadedClasses())
-                    .map(clazz -> new ClassInfo(clazz.getName())).toList();
-            content = new Classload(clientId, authToken, isEnabled,
-                    loadedClasses).toString();
+            Class[] loadedClasses = instrumentation.getAllLoadedClasses();
+            content = new ClassloadEvent(clientId, authToken,
+                    isEnabled, loadedClasses).toString();
+
         }
+
+        content = Utils.addAttributeToJson(content, Map.entry("version", props.getVersion()));
 
         try {
             HttpURLConnection connection = createConnection(telemetryUrl, content);
             int responseCode = connectAndGetResponseCode(connection);
             if (responseCode != HttpURLConnection.HTTP_OK) {
-                logger.warning("Error response from telemetry server - response code: " + responseCode);
+                logger.warning("Error response from telemetry server. Response code: " + responseCode);
             }
-        } catch (Error e) {
-            e.printStackTrace();
+        } catch (Error ex) {
+            logger.severe("Failed to send notification to server: " + ex.getMessage());
         }
     }
 
@@ -151,9 +160,5 @@ public class TelemetryClient {
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public boolean isEnabled() {
-        return isEnabled;
     }
 }

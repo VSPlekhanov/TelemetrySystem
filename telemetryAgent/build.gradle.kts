@@ -26,5 +26,5 @@ tasks.register<Exec>("runAppWithAgent") {
     val appJar = files(project.childProjects["app"]?.tasks?.jar).first().canonicalPath
     val agentJar = files(project.childProjects["agent"]?.tasks?.jar).first().canonicalPath
 
-    commandLine = listOf("java", "-javaagent:$agentJar=clientId=1&authToken=auth&enabled=true&url=http://localhost:8080/event&initialDelayMs=500&telemetryIntervalMs=1000", "-jar", appJar)
+    commandLine = listOf("java", "-javaagent:$agentJar=clientId=1&authToken=auth&enabled=false&initialDelayMs=0&telemetryIntervalMs=1000", "-jar", appJar)
 }

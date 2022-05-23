@@ -1,5 +1,7 @@
 package org.azul.telemetry;
 
+import org.azul.telemetry.entity.VMInfo;
+
 import java.util.Map;
 
 
@@ -13,6 +15,8 @@ public class RuntimeParameters {
     private int telemetryIntervalMs;
     private String url;
     private boolean enabled;
+    private VMInfo vmInfo;
+    private String version;
 
 
     public RuntimeParameters(RuntimeParamsCollector collectedParams) {
@@ -24,6 +28,8 @@ public class RuntimeParameters {
         telemetryIntervalMs = collectedParams.getTelemetryIntervalMs();
         url = collectedParams.getUrlProperty();
         enabled = collectedParams.getEnabledProperty();
+        vmInfo = collectedParams.getVmInfo();
+        version = collectedParams.getVersion();
     }
 
     public String getClientId() {
@@ -54,6 +60,14 @@ public class RuntimeParameters {
         return url;
     }
 
+    public VMInfo getVmInfo() {
+        return vmInfo;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
@@ -72,10 +86,6 @@ public class RuntimeParameters {
 
     public void setTelemetryIntervalMs(int telemetryIntervalMs) {
         this.telemetryIntervalMs = telemetryIntervalMs;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public void setEnabled(boolean enabled) {

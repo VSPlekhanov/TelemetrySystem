@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClassInfo {
+
     private final String className;
 
     public ClassInfo(String className) {
@@ -16,9 +17,10 @@ public class ClassInfo {
     @Override
     public String toString() {
         ObjectMapper mapper = new ObjectMapper();
-        Map<String, String> classInfo = new HashMap<>();
 
+        Map<String, String> classInfo = new HashMap<>();
         classInfo.put("className", className);
+
         String jsonResult = "";
         try {
             jsonResult = mapper.writerWithDefaultPrettyPrinter()

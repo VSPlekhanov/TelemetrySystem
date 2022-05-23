@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 
 public class Agent {
+
     private static final Logger logger = Logger.getLogger(Agent.class.getName());
     private static TelemetryClient client;
     private static Instrumentation instrumentation;
@@ -63,16 +64,12 @@ public class Agent {
             params.setEnabled(Boolean.parseBoolean(parsedArguments.get("enabled")));
         }
 
-        if (parsedArguments.containsKey("url")) {
-            params.setUrl(parsedArguments.get("url"));
-        }
-
         if (parsedArguments.containsKey("initialDelayMs")) {
             params.setInitialDelayMs(Integer.parseInt(parsedArguments.get("initialDelayMs")));
         }
 
         if (parsedArguments.containsKey("telemetryIntervalMs")) {
-            params.setInitialDelayMs(Integer.parseInt(parsedArguments.get("telemetryIntervalMs")));
+            params.setTelemetryIntervalMs(Integer.parseInt(parsedArguments.get("telemetryIntervalMs")));
         }
 
         return new TelemetryClient(params, instrumentation);

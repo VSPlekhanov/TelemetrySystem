@@ -1,4 +1,4 @@
-package org.azul.telemetry.entity;
+package org.azul.telemetry.entity.events;
 
 public enum EventType {
     STARTUP,

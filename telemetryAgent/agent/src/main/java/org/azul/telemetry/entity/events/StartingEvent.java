@@ -4,21 +4,26 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.azul.telemetry.entity.EventType;
+import org.azul.telemetry.entity.VMInfo;
 
 import java.util.Map;
 
-public class Starting extends Event {
+public class StartingEvent extends Event {
 
     private final Map<String, String> environmentVariables;
     private final Map<String, String> systemProperties;
 
-    public Starting(String clientId, String authToken,
-                    boolean isEnabled, Map<String, String> environmentVariables,
-                    Map<String, String> systemProperties) {
+    private final VMInfo vmInfo;
+
+    public StartingEvent(String clientId, String authToken,
+                         boolean isEnabled, Map<String, String> environmentVariables,
+                         Map<String, String> systemProperties,
+                         VMInfo vmInfo) {
+
         super(clientId, authToken, isEnabled);
         this.environmentVariables = environmentVariables;
         this.systemProperties = systemProperties;
+        this.vmInfo = vmInfo;
     }
 
     @Override
@@ -27,14 +32,14 @@ public class Starting extends Event {
         String jsonResult = "";
 
         try {
-            jsonResult = mapper.writerWithDefaultPrettyPrinter()
-                    .writeValueAsString(this);
+            jsonResult = mapper.writeValueAsString(this);
             JsonNode json = mapper.readTree(jsonResult);
 
             ((ObjectNode) json).put("@type", String.valueOf(EventType.STARTUP));
 
             String envVarsJson = mapper.writerWithDefaultPrettyPrinter()
                     .writeValueAsString(environmentVariables);
+
             String sysPropsJson = mapper.writerWithDefaultPrettyPrinter()
                     .writeValueAsString(systemProperties);
 
@@ -43,6 +48,9 @@ public class Starting extends Event {
 
             tempJson = mapper.readTree(sysPropsJson);
             ((ObjectNode) json).put("systemProperties", tempJson);
+
+            tempJson = mapper.readTree(vmInfo.toString());
+            ((ObjectNode) json).put("vmInfo", tempJson);
 
             jsonResult = mapper.writeValueAsString(json);
         } catch (JsonProcessingException e) {

@@ -4,18 +4,18 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.azul.telemetry.entity.EventType;
 
 import java.util.Map;
 
-public class Update extends Event {
+public class UpdateEvent extends Event {
 
     public final Map<String, String> environmentVariables;
     public final Map<String, String> systemProperties;
 
-    public Update(String clientId, String authToken, boolean isEnabled,
-                  Map<String, String> environmentVariables,
-                  Map<String, String> systemProperties) {
+    public UpdateEvent(String clientId, String authToken, boolean isEnabled,
+                       Map<String, String> environmentVariables,
+                       Map<String, String> systemProperties) {
+
         super(clientId, authToken, isEnabled);
         this.environmentVariables = environmentVariables;
         this.systemProperties = systemProperties;
@@ -35,6 +35,7 @@ public class Update extends Event {
 
             String envVarsJson = mapper.writerWithDefaultPrettyPrinter()
                     .writeValueAsString(environmentVariables);
+
             String sysPropsJson = mapper.writerWithDefaultPrettyPrinter()
                     .writeValueAsString(systemProperties);
 
