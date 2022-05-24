@@ -1,13 +1,12 @@
 package org.azul.telemetry.data.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.azul.telemetry.data.model.entity.Event;
 import org.azul.telemetry.data.repository.EventRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Service for <code>Event</code> access.

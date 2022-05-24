@@ -6,6 +6,5 @@ package org.azul.telemetry.web.configuration;
 public final class ApplicationMode {
     public static final String DEVELOPMENT = "DEVELOPMENT";
 
-    private ApplicationMode() {
-    }
+    private ApplicationMode() {}
 }

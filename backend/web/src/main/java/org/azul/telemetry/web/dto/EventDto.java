@@ -1,10 +1,9 @@
 package org.azul.telemetry.web.dto;
 
+import java.util.Date;
 import lombok.Data;
 import org.azul.telemetry.data.model.entity.Event;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Date;
 
 /**
  * DTO object for transferring <code>Event</code> over HTTP.
