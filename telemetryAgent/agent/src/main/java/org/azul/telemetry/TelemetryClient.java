@@ -44,6 +44,10 @@ public class TelemetryClient {
         this.authToken = props.getAuthToken();
         this.isEnabled = props.isEnabled();
         this.telemetryUrl = createUrl(props.getUrl());
+
+        if (clientId.isEmpty() || authToken.isEmpty()) {
+            throw new IllegalArgumentException("Client id and authorization token must be configured");
+        }
     }
 
     private static Thread createDaemonThread(Runnable task) {

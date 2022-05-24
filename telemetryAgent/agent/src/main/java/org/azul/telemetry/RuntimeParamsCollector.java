@@ -67,15 +67,46 @@ public class RuntimeParamsCollector {
     }
 
     public String getIdProperty() {
-        return environmentVars.get(ID_PROPERTY);
+        String idProperty = "";
+
+        try {
+            idProperty = environmentVars.get(ID_PROPERTY);
+        } catch (Exception ignored) {
+        }
+        return idProperty;
+    }
+
+    public String getAuthTokenProperty() {
+        String authTokenProperty = "";
+
+        try {
+            authTokenProperty = environmentVars.get(AUTH_TOKEN_PROPERTY);
+        } catch(Exception ignored) {
+        }
+
+        return authTokenProperty;
     }
 
     public int getInitialDelayMs() {
-        return Integer.parseInt(environmentVars.get(INITIAL_DELAY_PROPERTY));
+        int initialDelay = 0;
+
+        try {
+            initialDelay = Integer.parseInt(environmentVars.get(INITIAL_DELAY_PROPERTY));
+        } catch (NumberFormatException ignored) {
+        }
+
+        return initialDelay;
     }
 
     public int getTelemetryIntervalMs() {
-        return Integer.parseInt(environmentVars.get(TELEMETRY_INTERVAL_PROPERTY));
+        int telemetryIntervalMs = 1000;
+
+        try {
+            telemetryIntervalMs = Integer.parseInt(environmentVars.get(TELEMETRY_INTERVAL_PROPERTY));
+        } catch (Exception ignored) {
+        }
+
+        return telemetryIntervalMs;
     }
 
     public String getUrlProperty() {
@@ -86,12 +117,15 @@ public class RuntimeParamsCollector {
         return configProperties.getProperty(VERSION_PROPERTY);
     }
 
-    public String getAuthTokenProperty() {
-        return environmentVars.get(AUTH_TOKEN_PROPERTY);
-    }
-
     public boolean getEnabledProperty() {
-        return Boolean.parseBoolean(environmentVars.get(ENABLED_PROPERTY));
+        boolean isEnabled = true;
+
+        try {
+            isEnabled = Boolean.parseBoolean(environmentVars.get(ENABLED_PROPERTY));
+        } catch(Exception ignored) {
+        }
+
+        return isEnabled;
     }
 
     public VMInfo getVmInfo() {
