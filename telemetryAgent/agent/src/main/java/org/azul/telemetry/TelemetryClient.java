@@ -68,6 +68,7 @@ public class TelemetryClient {
             logger.info("Starting telemetry client");
 
             sendEventNotification(EventType.STARTUP);
+            sendEventNotification(EventType.CLASSLOAD);
 
             try {
                 scheduledExecutor.scheduleAtFixedRate(
