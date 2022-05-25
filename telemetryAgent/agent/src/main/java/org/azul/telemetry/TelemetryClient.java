@@ -132,11 +132,11 @@ public class TelemetryClient {
             connection.connect();
 
             int responseCode = connection.getResponseCode();
-            Object responseContent = connection.getContent();
 
             connection.disconnect();
 
             if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                Object responseContent = connection.getContent();
                 setVmId(responseContent);
                 sendEventNotification(eventType);
 
