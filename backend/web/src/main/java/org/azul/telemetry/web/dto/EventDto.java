@@ -1,9 +1,10 @@
 package org.azul.telemetry.web.dto;
 
-import java.util.Date;
 import lombok.Data;
 import org.azul.telemetry.data.model.entity.Event;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Date;
 
 /**
  * DTO object for transferring <code>Event</code> over HTTP.
@@ -19,7 +20,8 @@ public class EventDto {
     @NotNull
     private final UserDto user;
     @NotNull
-    private final String additional;
+    // TODO: 25.05.2022 temporary fix
+    private String additional;
 
     /**
      * Creates DTO object from <code>Event</code>.
