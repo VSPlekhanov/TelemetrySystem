@@ -12,6 +12,5 @@ import lombok.Value;
 @JsonSerialize
 @Value
 public class ShutdownEventData implements EventData {
-    String reason;
-    Integer exitCode;
+    boolean enabled;
 }

@@ -32,14 +32,14 @@ public class Mapper {
             case SHUTDOWN:
                 ShutdownEventDto shutdownEventDto = (ShutdownEventDto) dto;
                 return ShutdownEventData.builder()
-                        .reason(shutdownEventDto.getReason())
-                        .exitCode(shutdownEventDto.getExitCode())
+                        .enabled(shutdownEventDto.isEnabled())
                         .build();
             case STARTUP:
                 StartEventDto startEventDto = (StartEventDto) dto;
                 return StartEventData.builder()
                         .environmentVariables(startEventDto.getEnvironmentVariables())
                         .systemProperties(startEventDto.getSystemProperties())
+                        .vmInfo(startEventDto.getVmInfo())
                         .build();
             case UPDATE:
                 UpdateEventDto updateEventDto = (UpdateEventDto) dto;

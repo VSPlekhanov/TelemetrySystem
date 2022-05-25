@@ -8,6 +8,7 @@ import org.azul.telemetry.entity.ClassInfo;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClassloadEvent extends Event {
     private final Class[] loadedClasses;
@@ -31,7 +32,7 @@ public class ClassloadEvent extends Event {
             ((ObjectNode) json).put("@type", String.valueOf(EventType.CLASSLOAD));
 
             List<ClassInfo> classInfo = Arrays.stream(loadedClasses)
-                    .map(clazz -> new ClassInfo(clazz.getCanonicalName())).toList();
+                    .map(clazz -> new ClassInfo(clazz.getCanonicalName())).collect(Collectors.toList());
 
             String loadedClassesJson = classInfo.toString();
             JsonNode tempJson = mapper.readTree(loadedClassesJson);

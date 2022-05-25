@@ -1,0 +1,7 @@
+{
+  "clientId": "1",
+  "authToken": "auth",
+  "createdAt": "2022-05-23T08:20:00.269Z",
+  "enabled": false,
+  "@type": "SHUTDOWN"
+}

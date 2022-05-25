@@ -9,5 +9,10 @@
   },
   "systemProperties": {
     "k": "v"
+  },
+  "vmInfo": {
+    "vmName": "Java HotSpot(TM) 64-Bit Server VM",
+    "vmVersion": "16+36-2231",
+    "vmVendor": "Oracle Corporation"
   }
 }

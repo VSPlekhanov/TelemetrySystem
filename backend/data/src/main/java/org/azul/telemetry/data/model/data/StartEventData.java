@@ -18,5 +18,7 @@ public class StartEventData implements EventData {
     Map<String, String> environmentVariables;
     @JsonProperty
     Map<String, String> systemProperties;
+    @JsonProperty
+    Map<String, String> vmInfo;
 }
 

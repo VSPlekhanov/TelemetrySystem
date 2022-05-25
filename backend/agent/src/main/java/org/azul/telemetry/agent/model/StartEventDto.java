@@ -21,5 +21,10 @@ public class StartEventDto extends EventDto {
     @NotNull
     @JsonProperty("systemProperties")
     Map<String, String> systemProperties;
+
+    @NotNull
+    @JsonProperty("vmInfo")
+    Map<String, String> vmInfo;
+
 }
 

@@ -9,6 +9,16 @@ services:
     depends_on:
       - db
 
+  web:
+    image: web:latest
+    restart: unless-stopped
+    ports:
+      - '8090:80'
+      - '3000:3000'
+    command: [ 'java', '-jar', 'web.jar' ]
+    depends_on:
+      - db
+
   db:
     image: postgres:14.1
     volumes:

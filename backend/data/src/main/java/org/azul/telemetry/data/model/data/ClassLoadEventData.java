@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Builder
@@ -20,7 +19,6 @@ public class ClassLoadEventData implements EventData {
     @Builder
     @JsonSerialize
     public static class LoadedClassInfo {
-        @NotNull
         @JsonProperty("className")
         String className;
     }

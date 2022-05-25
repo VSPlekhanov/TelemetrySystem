@@ -15,10 +15,6 @@ import javax.validation.constraints.NotNull;
 @SuperBuilder
 public class ShutdownEventDto extends EventDto {
     @NotNull
-    @JsonProperty("reason")
-    String reason;
-
-    @NotNull
-    @JsonProperty("exitCode")
-    Integer exitCode;
+    @JsonProperty("enabled")
+    boolean enabled;
 }

@@ -1,14 +1,5 @@
-version: '3.3'
+version: '3.9'
 services:
-  agent:
-    image: agent:latest
-    restart: unless-stopped
-    ports:
-      - '${AZUL_TELEMETRY_AGENT_BACKEND_PORT:-8080}:8080'
-    command: [ 'java', '-jar', 'agent-1.0-SNAPSHOT.jar' ]
-    depends_on:
-      - db
-
   db:
     image: postgres:14.1
     volumes:
@@ -17,6 +8,17 @@ services:
       POSTGRES_USER: ${AZUL_TELEMETRY_DB_USERNAME}
       POSTGRES_PASSWORD: ${AZUL_TELEMETRY_DB_PASSWORD}
       POSTGRES_DB: ${AZUL_TELEMETRY_DB_DBNAME}
-    restart: unless-stopped
     ports:
-      - '${AZUL_TELEMETRY_DB_PORT:-5432}:5432'
+      - '127.0.0.1:${AZUL_TELEMETRY_DB_PORT:-5432}:5432'
+
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    environment:
+#      PGADMIN_CONFIG_SERVER_MODE: 'False'
+#      PGADMIN_DEFAULT_EMAIL: ${AZUL_TELEMETRY_PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+#      PGADMIN_DEFAULT_PASSWORD: ${AZUL_TELEMETRY_PGADMIN_DEFAULT_PASSWORD:-admin}
+#    volumes:
+#      - ./pgadmin-data/:/var/lib/pgadmin
+#    restart: unless-stopped
+#    ports:
+#      - '127.0.0.1:${AZUL_TELEMETRY_PGADMIN_PORT:-5050}:80'
