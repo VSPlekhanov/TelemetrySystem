@@ -36,6 +36,8 @@ public class TelemetryClient {
     private boolean isEnabled;
     private final Instrumentation instrumentation;
 
+    private String vmId = "unknown";
+
     TelemetryClient(RuntimeParameters props, Instrumentation instrumentation) {
         this.props = props;
         this.instrumentation = instrumentation;
@@ -123,11 +125,22 @@ public class TelemetryClient {
         }
 
         content = Utils.addAttributeToJson(content, Map.entry("version", props.getVersion()));
+        content = Utils.addAttributeToJson(content, Map.entry("vmId", vmId));
 
         try {
             HttpURLConnection connection = createConnection(telemetryUrl, content);
-            int responseCode = connectAndGetResponseCode(connection);
-            if (responseCode != HttpURLConnection.HTTP_OK) {
+            connection.connect();
+
+            int responseCode = connection.getResponseCode();
+            Object responseContent = connection.getContent();
+
+            connection.disconnect();
+
+            if (responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
+                setVmId(responseContent);
+                sendEventNotification(eventType);
+
+            } else if (responseCode != HttpURLConnection.HTTP_OK) {
                 logger.warning("Error response from telemetry server. Response code: " + responseCode);
             }
         } catch (Error ex) {
@@ -135,11 +148,10 @@ public class TelemetryClient {
         }
     }
 
-    private int connectAndGetResponseCode(HttpURLConnection connection) throws IOException {
-        connection.connect();
-        int responseCode = connection.getResponseCode();
-        connection.disconnect();
-        return responseCode;
+    private void setVmId(Object responseContent) {
+        if (vmId.equals("unknown") && responseContent instanceof String) {
+            vmId = (String) responseContent;
+        }
     }
 
     private HttpURLConnection createConnection(URL url, String serializedContent) throws IOException {
