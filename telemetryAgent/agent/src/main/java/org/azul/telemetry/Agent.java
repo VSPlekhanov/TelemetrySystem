@@ -47,10 +47,15 @@ public class Agent {
     }
 
     private static TelemetryClient configureClient(String cmdLineArgs) {
-        Map<String, String> parsedArguments = Utils.parseCmdLineArgs(cmdLineArgs);
 
         RuntimeParamsCollector paramsCollector = new RuntimeParamsCollector();
         RuntimeParameters params = new RuntimeParameters(paramsCollector);
+
+        if (cmdLineArgs == null || cmdLineArgs.isEmpty()) {
+            return new TelemetryClient(params, instrumentation);
+        }
+
+        Map<String, String> parsedArguments = Utils.parseCmdLineArgs(cmdLineArgs);
 
         if (parsedArguments.containsKey("telemetry.agent.id")) {
             params.setClientId(parsedArguments.get("telemetry.agent.id"));
