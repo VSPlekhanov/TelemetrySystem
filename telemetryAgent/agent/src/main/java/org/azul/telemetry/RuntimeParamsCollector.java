@@ -2,8 +2,8 @@ package org.azul.telemetry;
 
 import org.azul.telemetry.entity.VMInfo;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class RuntimeParamsCollector {
     private final static String TELEMETRY_INTERVAL_PROPERTY = "telemetry.agent.telemetry_interval";
     private final static String VERSION_PROPERTY = "telemetry.agent.version";
 
-    private static final String AGENT_CONFIG = "agent\\src\\main\\resources\\agent.config";
+    private static final String AGENT_CONFIG = "agent.config";
     private static final Properties configProperties = new Properties();
 
     /**
@@ -50,10 +50,10 @@ public class RuntimeParamsCollector {
         systemProperties = runtimeMxBean.getSystemProperties();
 
 
-        try (FileInputStream fis = new FileInputStream(AGENT_CONFIG)) {
-            configProperties.load(fis);
+        try (InputStream input = getClass().getClassLoader().getResourceAsStream(AGENT_CONFIG)) {
+            configProperties.load(input);
         } catch (IOException ex) {
-            logger.severe(ex.getMessage());
+            ex.printStackTrace();
         }
     }
 
@@ -81,7 +81,7 @@ public class RuntimeParamsCollector {
 
         try {
             authTokenProperty = environmentVars.get(AUTH_TOKEN_PROPERTY);
-        } catch(Exception ignored) {
+        } catch (Exception ignored) {
         }
 
         return authTokenProperty;
@@ -122,7 +122,7 @@ public class RuntimeParamsCollector {
 
         try {
             isEnabled = Boolean.parseBoolean(environmentVars.get(ENABLED_PROPERTY));
-        } catch(Exception ignored) {
+        } catch (Exception ignored) {
         }
 
         return isEnabled;
