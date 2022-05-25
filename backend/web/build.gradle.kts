@@ -38,6 +38,6 @@ tasks.getByName<JavaExec>("bootRun") {
     classpath("${project.rootDir}") // To fetch .env file
 }
 
-tasks.getByName<JavaCompile>("compileJava") {
-    inputs.files(tasks.named("processResources"))
-}
+//tasks.getByName<JavaCompile>("compileJava") {
+//    inputs.files(tasks.named("processResources"))
+//}

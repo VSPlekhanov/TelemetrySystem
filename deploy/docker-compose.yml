@@ -13,11 +13,25 @@ services:
     image: web:latest
     restart: unless-stopped
     ports:
-      - '8090:80'
-      - '3000:3000'
+      - '8090:8090'
     command: [ 'java', '-jar', 'web.jar' ]
     depends_on:
       - db
+
+  front:
+    image: front:latest
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    command: [ 'npm', 'run', 'dev' ]
+    depends_on:
+      - web
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - '80:80'
 
   db:
     image: postgres:14.1

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
  * Main app class.
  */
 @SpringBootApplication
-@Import({DataConfiguration.class})
+@Import(DataConfiguration.class)
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
