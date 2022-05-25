@@ -73,6 +73,12 @@ public class RuntimeParamsCollector {
             idProperty = environmentVars.get(ID_PROPERTY);
         } catch (Exception ignored) {
         }
+
+        try {
+            idProperty = configProperties.getProperty(ID_PROPERTY);
+        } catch (Exception ignored) {
+        }
+
         return idProperty;
     }
 
@@ -84,6 +90,10 @@ public class RuntimeParamsCollector {
         } catch (Exception ignored) {
         }
 
+        try {
+            authTokenProperty = configProperties.getProperty(URL_PROPERTY);
+        } catch (Exception ignored) {
+        }
         return authTokenProperty;
     }
 
