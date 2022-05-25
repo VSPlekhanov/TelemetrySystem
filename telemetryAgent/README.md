@@ -9,7 +9,7 @@ This java agent is for sending information about JVM runtime. For now, agent col
 
 ## Installation
 
-* Download the [latest release](ADD LINK HERE)
+* Download the [latest release](https://drive.google.com/drive/folders/1PU0tPLAh9YD_xvFDPQc32pDHtzbDuMfJ?usp=sharing)
 * Run your Java application with the JVM argument `-javaagent:agent-<version>.jar[=<Optional configuration parameters>]`
 
 ## Configuration
