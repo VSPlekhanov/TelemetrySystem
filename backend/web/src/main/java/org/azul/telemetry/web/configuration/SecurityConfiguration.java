@@ -44,8 +44,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 requests.antMatchers("/api/admin/auth/login/**").permitAll();
 
                 if (envMode.equals(ApplicationMode.DEVELOPMENT)) {
-                    requests.antMatchers("/api/admin/auth/register/**").permitAll();
-                } else if (envMode.equals(ApplicationMode.WITHOUT_AUTH)) {
                     requests.antMatchers("/**").permitAll();
                 } else {
                     requests

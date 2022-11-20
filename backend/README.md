@@ -12,7 +12,7 @@ with Spring + Flyway context setup in test environment. It will be fixed soon
 ### Common
 - Configure local environment (first time only)
     ```sh
-    $ cp .env.example.env
+    $ cp .env.example .env
     $ vim .env
     ```
 - Start DB and pgAdmin
@@ -24,13 +24,21 @@ with Spring + Flyway context setup in test environment. It will be fixed soon
     $ chown -R 5050:5050 pgadmin-data
     ```
 ### `web` project
-- Create signature for JWT signing (first time only).
+- Create signature for JWT signing (first time only). See details below
     ```sh
     $ openssl rand -out <file from .env> -base64 256
     ```
 - Start application
     ```sh
     $ ./gradlew :web:bootRun
+    ```
+- Create admin user (first time only). If you run application in `DEVELOPMENT` mode
+you can do this via HTTP request
+    ```sh
+     $ curl \
+         -d '{"username":"admin", "password":"admin"}' \
+         -H "Content-Type: application/json" \
+         -X POST http://localhost:8090/api/admin/auth/register
     ```
 
 ## Configuration
@@ -42,6 +50,7 @@ Configuration example can be found in `.env.example`
 - `AZUL_TELEMETRY_DB_HOST` -- address of database host (without port or protocol)
 - `AZUL_TELEMETRY_DB_PORT` -- database port
 - `AZUL_TELEMETRY_DB_DBNAME` -- database name
+- `AZUL_TELEMETRY_DB_SCHEMA` -- database schema
 - `AZUL_TELEMETRY_DB_USERNAME` -- username for database
 - `AZUL_TELEMETRY_DB_PASSWORD` -- database password
 - `AZUL_TELEMETRY_WEB_JWT_SECRET` -- File with digital signature for JWT signing.
@@ -50,5 +59,4 @@ Configuration example can be found in `.env.example`
    with any base64 encoded string with length of original string at least 64 bytes.
    For example in test resources it is encoded "Lorem ipsum..."
 - `AZUL_TELEMETRY_ENVIRONMENT` -- string representing environment.
-  - `WITHOUT_AUTH` -- disables auth checking for HTTP requests
-  - `DEVELOPMENT` -- some security checks are disabled.
+  - `DEVELOPMENT` -- Auth checks are disabled.
