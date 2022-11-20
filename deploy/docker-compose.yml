@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     ports:
       - '${AZUL_TELEMETRY_AGENT_BACKEND_PORT:-8080}:8080'
-    command: [ 'java', '-jar', 'agent-1.0-SNAPSHOT.jar' ]
+    command: [ 'java', '-jar', 'agent.jar' ]
     depends_on:
       - db
 
