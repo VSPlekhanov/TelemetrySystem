@@ -23,7 +23,9 @@ with Spring + Flyway context setup in test environment. It will be fixed soon
     ```sh
     $ chown -R 5050:5050 pgadmin-data
     ```
+
 ### `web` project
+
 - Create signature for JWT signing (first time only). See details below
     ```sh
     $ openssl rand -out <file from .env> -base64 256
@@ -32,8 +34,7 @@ with Spring + Flyway context setup in test environment. It will be fixed soon
     ```sh
     $ ./gradlew :web:bootRun
     ```
-- Create admin user (first time only). If you run application in `DEVELOPMENT` mode
-you can do this via HTTP request
+- Create admin user (first time only). If you run application in `DEVELOPMENT` mode you can do this via HTTP request
     ```sh
      $ curl \
          -d '{"username":"admin", "password":"admin"}' \
@@ -59,4 +60,4 @@ Configuration example can be found in `.env.example`
    with any base64 encoded string with length of original string at least 64 bytes.
    For example in test resources it is encoded "Lorem ipsum..."
 - `AZUL_TELEMETRY_ENVIRONMENT` -- string representing environment.
-  - `DEVELOPMENT` -- Auth checks are disabled.
+    - `DEVELOPMENT` -- Auth checks are disabled.
