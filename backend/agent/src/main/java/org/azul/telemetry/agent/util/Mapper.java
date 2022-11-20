@@ -20,7 +20,7 @@ public class Mapper {
         ObjectMapper mapper = new ObjectMapper();
         String eventData = mapper.writeValueAsString(getEventDataFromEventDto(dto));
         Event event = new Event();
-        event.setEventData(eventData);
+        event.setEventData(mapper.readTree(eventData));
         event.setEventType(dto.getEventType());
         event.setUser(user);
         event.setCreatedAt(dto.getCreatedAt());
